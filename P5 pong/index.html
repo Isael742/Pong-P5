@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong</title>
+    
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js" integrity="sha512-3RlxD1bW34eFKPwj9gUXEWtdSMC59QqIqHnD8O/NoTwSJhgxRizdcFVQhUMFyTp5RwLTDL0Lbcqtl8b7bFAzog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./ball.js"></script>
+    <script src="./paddle.js"></script>
+    <script>
+      
+    let ball;
+    let p1;
+    let p2;
+    const SPEED_PADDLE = 10;
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      ball = new Ball();
+      p1 = new Paddle(true);
+      p2 = new Paddle(false);
+    }
+
+    function draw() {
+      background('white')
+      ball.draw();
+      p1.draw();
+      p2.draw();
+
+      ball.move();
+      p1.update();
+      p2.update();
+
+      ball.edge();
+    }
+
+    function keyReleased(){
+      p1.move(0);
+      p2.move(0);
+    }
+
+    function keyPressed(){
+        //Player 1
+        if(keyCode === 87){
+          p1.move(-SPEED_PADDLE);
+        }
+        if(keyCode === 83){
+          p1.move(SPEED_PADDLE);
+        }
+        //PlaYER 2
+        if(keyCode === UP_ARROW){
+          p2.move(-SPEED_PADDLE);
+        }
+        if(keyCode === DOWN_ARROW){
+          p2.move(SPEED_PADDLE);
+        }
+    }
+    </script>
+    
+</body>
+</html>
